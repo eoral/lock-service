@@ -1,7 +1,13 @@
 # About
 - This is an extensible lock service.
 - Default implementation uses file system to persist locks.
-- It can be extended to use other persistence layers such as an S3 bucket or a database.
+- It can be extended to use other persistence layers such as an S3 bucket or a database. Just implement this interface:
+```
+public interface LockPersistence {
+    boolean persist(String lockName, String token, Instant acquireTime);
+    void delete(String lockName, String token);
+}
+```
 - It is a Maven web application.
 
 # Before running the application
